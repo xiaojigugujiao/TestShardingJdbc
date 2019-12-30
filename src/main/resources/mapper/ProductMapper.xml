@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luxin.base.mapper.ProductMapper">
+
+    <resultMap id="resultMap" type="com.luxin.base.domain.Product">
+        <id property="id" column="ID"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="stock" column="STOCK"/>
+        <result property="version" column="VERSION"/>
+        <result property="note" column="NOTE"/>
+        <result property="type" column="TYPE"/>
+    </resultMap>
+
+    <select id="findList" resultMap="resultMap">
+        select * from product
+    </select>
+
+    <select id="findById" resultMap="resultMap">
+        select * from product where id=#{id}
+    </select>
+
+    <insert id="insertProduct" parameterType="com.luxin.base.domain.Product">
+        insert into product(id,product_name,price,stock,version,note,`type`)
+        values (#{id},#{productName},#{price},#{stock},#{version},#{note},#{type})
+    </insert>
+
+</mapper>

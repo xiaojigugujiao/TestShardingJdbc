@@ -1,0 +1,94 @@
+spring:
+#  application:
+#    name: base
+
+  #redis配置
+
+  redis:
+    password:
+    host: 111.229.229.195
+
+#  #是否允许覆盖相同的bean
+#  main:
+#    allow-bean-definition-overriding: true
+
+  #
+  profiles:
+    active: -ds
+
+
+server:
+  port: 8111
+
+
+eureka:
+  instance:
+    #心跳超时时间10s，默认90s。从client端最后一次发出心跳后，达到这个时间没有再次发出心跳，表示服务不可用，将它的实例从注册中心移除
+    lease-expiration-duration-in-seconds: 1
+    #心跳间隔5s，默认30s。每一个服务配置后，心跳间隔和心跳超时时间会被保存在server端，不同服务的心跳频率可能不同，server端会根据保存的配置来分别探活
+    lease-renewal-interval-in-seconds: 3
+    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${server.port}
+
+  client:
+    service-url:
+      defaultZone: http://peer1-eureka:7001/eureka/,http://peer1-eureka:7002/eureka/
+
+
+logging:
+  level:
+    root: INFO
+    com.luxin.base: INFO
+
+
+
+#sharding:
+#  jdbc:
+#    datasource:
+#      names: ds0,ds1
+#
+#      ds0:
+#        jdbcUrl: jdbc:mysql://localhost:3306/order?allowMultiQueries=true&characterEncoding=utf8&serverTimezone=GMT
+#        username: root
+#        password:
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        type: com.zaxxer.hikari.HikariDataSource
+#
+#      ds1:
+#        jdbcUrl: jdbc:mysql://localhost:3306/order1?allowMultiQueries=true&characterEncoding=utf8&serverTimezone=GMT
+#        username: root
+#        password:
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        type: com.zaxxer.hikari.HikariDataSource
+#    config:
+#      sharding:
+#        props:
+#          #显示sql
+#          sql.show: true
+#
+#        tables:
+#          #要操作的库表
+#          product:
+#            #自增列名称，如果配置了值，则表中不会自动生成序列值。
+##            key-generator-column-name: id
+#            #自增列值生成器类名称，缺省表示使用默认自增列值生成器。该类需提供无参数的构造器
+#            #            key-generator-class-name:
+#            #真实表数据节点，由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式。
+#            actual-data-nodes: ds${0..1}.product
+#            #分库策略
+#            database-strategy:
+#              inline:
+#                 #列名称，多个列以逗号相隔
+#                sharding-column: id
+#                #分模算法行表达式，按模运算分配
+#                algorithm-expression: ds${id % 2}
+
+#            #分表策略
+#            table-strategy:
+#              inline:
+#                shardingColumn: type
+#                algorithm-expression: product${type % 2}
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml

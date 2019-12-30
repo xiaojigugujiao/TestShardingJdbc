@@ -1,0 +1,16 @@
+#ds0:
+#  jdbcUrl: jdbc:mysql://localhost:3306/order?allowMultiQueries=true&characterEncoding=utf8&serverTimezone=GMT
+#  username: root
+#  password:
+#  driverClassName: com.mysql.cj.jdbc.Driver
+#
+#
+#ds1:
+#  jdbcUrl: jdbc:mysql://localhost:3306/order?allowMultiQueries=true&characterEncoding=utf8&serverTimezone=GMT
+#  username: root
+#  password:
+#  driverClassName: com.mysql.cj.jdbc.Driver
+
+spring:
+  application:
+    name: base

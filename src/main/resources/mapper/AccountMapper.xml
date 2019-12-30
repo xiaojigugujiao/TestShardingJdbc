@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luxin.base.mapper.AccountMapper">
+
+    <resultMap id="resultMap" type="com.luxin.base.domain.Account">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="balance" column="BALANCE"/>
+    </resultMap>
+
+
+
+    <select id="findList" resultMap="resultMap">
+        select * from account
+    </select>
+</mapper>
